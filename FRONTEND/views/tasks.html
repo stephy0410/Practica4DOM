@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tareas - Gestor de Tareas</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- FontAwesome para íconos -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Estilos personalizados -->
+    
+    <style>
+        body {
+            background-color: #cfb1ee;
+        }
+        .navbar {
+            background-color: #7014cc;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            color: white;
+            justify-content: center;
+            align-items: center;
+        } 
+
+        .badge {
+            margin-right: 5px;
+        }
+        .fixed-bottom-right {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+        }
+        .profile-icon img { 
+            width: 48px;
+             height: 48px; 
+             border-radius: 50%; 
+             object-fit: cover; 
+        }
+        .table {
+        --bs-table-bg: transparent !important; /* Reset del background de Bootstrap */
+    }
+    
+
+    .table thead {
+        background-color: #7014cc !important;
+        color: white;
+    }
+    
+    .table thead th {
+        background-color: #7014cc !important;
+        border-bottom: none;
+        color: white;
+        font-weight: 600;
+    }
+    
+    .table tbody tr {
+        background-color: #e7d8f7 ;
+        border-bottom: 1px solid #dee2e6;
+    }
+    
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container-fluid">
+            <a class="navbar-brand profile-icon" href="home.html">
+                <i id="user-icon" class="fas fa-user-circle" style="font-size:48px; color:#e7d8f7;"></i>
+                <img id="user-img" src="https://via.placeholder.com/100" alt="Usuario" style="display:none;">
+            </a>
+            <button class="navbar-toggler" style="color:#e7d8f7;" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <i class="material-icons">menu</i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto "style="color:#e7d8f7;">
+                    <li class="nav-item">
+                        <a class="nav-link" href="tasks.html" style="color:#e7d8f7;">Tareas</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" style="color:#e7d8f7;" role="button" data-bs-toggle="dropdown">
+                            Etiquetas
+                        </a>
+                        <ul class="dropdown-menu" id="tagsDropdown">
+                            <!-- Las etiquetas se insertarán aquí -->
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#newTagModal">Nueva Etiqueta</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <form class="d-flex">
+                    <input class="form-control " type="search" placeholder="Buscar">
+                    <button class="btn btn-outline-success ms-2 " type="submit">Buscar</button>
+                </form>
+                <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#logoutModal">
+                    <i class="fas fa-sign-out-alt ms-2" style="cursor:pointer" title="Cerrar Sesión"></i> 
+                </a>
+                <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#editUserModal">
+                    <i class="fas fa-cog ms-2" style="cursor:pointer" title="Editar Perfil"></i>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contenido principal -->
+    <div class="container mt-4">
+        <div class="row">
+
+            <!-- Widget: Tareas de Hoy -->
+            <div class="col-12 ">
+                <div >
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <i class="fas fa-check"></i>
+                                </th>
+                                <th>Tarea</th>
+                                <th>Etiquetas</th>
+                                <th>Fecha</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <input type="checkbox" class="task-checkbox">
+                                </td>
+                                <td>Escribir 3 páginas</td>
+                                <td><span class="badge bg-primary">Proyectos</span></td>
+                                <td>15/02/2025</td>
+                                <td>
+                                    <i class="fas fa-pen" style="cursor:pointer; margin-right:10px; color:blue;" title="Editar"></i>
+                                    <i class="fas fa-trash" style="cursor:pointer; margin-right:10px;color:red;" title="Eliminar"></i>
+                                    <i class="fas fa-tag" style="cursor:pointer; color:green;" title="Etiquetar" ></i>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="checkbox" class="task-checkbox">
+                                </td>
+                                <td>Ir al gimnasio</td>
+                                <td><span class="badge bg-success">Salud</span></td>
+                                <td>15/02/2025</td>
+                                <td>
+                                    <i class="fas fa-pen" style="cursor:pointer; margin-right:10px; color:blue;" title="Editar"></i>
+                                    <i class="fas fa-trash" style="cursor:pointer; margin-right:10px;color:red;" title="Eliminar"></i>
+                                    <i class="fas fa-tag" style="cursor:pointer; color:green;" title="Etiquetar" ></i>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="checkbox" class="task-checkbox">
+                                </td>
+                                <td>Dormir bien</td>
+                                <td><span class="badge bg-success">Salud</span></td>
+                                <td>15/02/2025</td>
+                                <td>
+                                    <i class="fas fa-pen" style="cursor:pointer; margin-right:10px; color:blue;" title="Editar"></i>
+                                    <i class="fas fa-trash" style="cursor:pointer; margin-right:10px;color:red;" title="Eliminar"></i>
+                                    <i class="fas fa-tag" style="cursor:pointer; color:green;" title="Etiquetar" ></i>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="checkbox" class="task-checkbox">
+                                </td>
+                                <td>Sacar basura</td>
+                                <td><span class="badge bg-warning">Higiene</span></td>
+                                <td>15/02/2025</td>
+                                <td>
+                                    <i class="fas fa-pen" style="cursor:pointer; margin-right:10px; color:blue;" title="Editar"></i>
+                                    <i class="fas fa-trash" style="cursor:pointer; margin-right:10px;color:red;" title="Eliminar"></i>
+                                    <i class="fas fa-tag" style="cursor:pointer; color:green;" title="Etiquetar" ></i>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="checkbox" class="task-checkbox" checked>
+                                </td>
+                                <td><del>Armar índice</del></td>
+                                <td><span class="badge bg-primary">Proyectos</span></td>
+                                <td>14/02/2025</td>
+                                <td>
+                                    <i class="fas fa-pen" style="cursor:pointer; margin-right:10px; color:blue;" title="Editar"></i>
+                                    <i class="fas fa-trash" style="cursor:pointer; margin-right:10px;color:red;" title="Eliminar"></i>
+                                    <i class="fas fa-tag" style="cursor:pointer; color:green;" title="Etiquetar" ></i>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="checkbox" class="task-checkbox" checked>
+                                </td>
+                                <td><del>Bañarse</del></td>
+                                <td><span class="badge bg-warning">Higiene</span></td>
+                                <td>15/02/2025</td>
+                                <td>
+                                    <i class="fas fa-pen" style="cursor:pointer; margin-right:10px; color:blue;" title="Editar"></i>
+                                    <i class="fas fa-trash" style="cursor:pointer; margin-right:10px;color:red;" title="Eliminar"></i>
+                                    <i class="fas fa-tag" style="cursor:pointer; color:green;" title="Etiquetar" ></i>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="checkbox" class="task-checkbox" checked>
+                                </td>
+                                <td><del>Reunión con Matt</del></td>
+                                <td><span class="badge bg-danger">Trabajo</span></td>
+                                <td>14/02/2025</td>
+                                <td>
+                                    <i class="fas fa-pen" style="cursor:pointer; margin-right:10px; color:blue;" title="Editar"></i>
+                                    <i class="fas fa-trash" style="cursor:pointer; margin-right:10px;color:red;" title="Eliminar"></i>
+                                    <i class="fas fa-tag" style="cursor:pointer; color:green;" title="Etiquetar" ></i>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="checkbox" class="task-checkbox" checked>
+                                </td>
+                                <td><del>Practica 1/del></td>
+                                <td><span class="badge bg-danger">Trabajo</span></td>
+                                <td>17/02/2025</td>
+                                <td>
+                                    <i class="fas fa-pen" style="cursor:pointer; margin-right:10px; color:blue;" title="Editar"></i>
+                                    <i class="fas fa-trash" style="cursor:pointer; margin-right:10px;color:red;" title="Eliminar"></i>
+                                    <i class="fas fa-tag" style="cursor:pointer; color:green;" title="Etiquetar" ></i>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Botón flotante para crear tarea -->
+    <button class="btn btn-primary fixed-bottom-right" data-bs-toggle="modal" data-bs-target="#newTaskModal">
+        <i class="fas fa-plus"></i>
+    </button>
+
+    <!-- Modal: Crear Tarea -->
+    <div class="modal fade" id="newTaskModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Crear Tarea</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="taskName" class="form-label">Nombre de la Tarea</label>
+                            <input type="text" class="form-control" id="taskName" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="taskTag" class="form-label">Etiqueta</label>
+                            <select class="form-select" id="taskTag" required>
+                                <option value="Salud">Salud</option>
+                                <option value="Proyectos">Proyectos</option>
+                                <option value="Higiene">Higiene</option>
+                                <option value="Trabajo">Trabajo</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="taskDate" class="form-label">Fecha</label>
+                            <input type="date" class="form-control" id="taskDate" required>
+                        </div>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Crear Tarea</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal: Crear Etiqueta-->
+    <div class="modal fade"  id="newTagModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Nueva Etiqueta</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="tagName" class="form-label">Nombre</label>
+                            <input type="text" class="form-control" id="tagName" placeholder="Deporte" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="tagColor" class="form-label">Color</label>
+                        <input type="color" class="form-control form-control-color w-100" id="tagColor" value="#563d7c" required>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Crear Etiqueta</button>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Cerrar Sesión -->
+    <div class="modal fade" id="logoutModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Cerrar Sesión</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p>¿Estás seguro de que deseas cerrar sesión?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-danger" onclick="logout()">Aceptar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal: Editar Usuario -->
+    <div class="modal fade"  id="editUserModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Editar Perfil</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="editName" class="form-label">Nombre</label>
+                            <input type="text" class="form-control" id="editName" name="name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="editEmail" class="form-label">Correo</label>
+                            <input type="text" class="form-control" id="editEmail" name="email" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="editPassword" class="form-label">Contraseña</label>
+                            <input type="password" class="form-control" id="editPassword" name="password" required>
+                        </div>
+                    <div class="d-flex justify-content-between">
+                        <button type="button" class="btn btn-danger me-auto" onclick="confirmDelete()" id="deleteBtn">Eliminar</button>
+                        <button type="button" class="btn btn-primary" onclick="updateUser()" id="saveBtn">Guardar Cambios</button>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal: Confirmar Eliminación -->
+    <div class="modal fade" id="confirmDeleteModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Confirmar Eliminación</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p>¿Estás seguro de que deseas eliminar tu cuenta? Esta acción no se puede deshacer.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-danger" onclick="deleteUser()">Eliminar Cuenta</button>
+                </div>
+            </div>
+        </div>
+    </div>
+        <!-- Modal: Editar Etiqueta -->
+    <div class="modal fade" id="editTagModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Editar Etiqueta</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="editTagForm">
+                        <input type="hidden" id="editTagId">
+                        <div class="mb-3">
+                            <label for="editTagName" class="form-label">Nombre</label>
+                            <input type="text" class="form-control" id="editTagName" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="editTagColor" class="form-label">Color</label>
+                            <input type="color" class="form-control form-control-color w-100" id="editTagColor" required>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <button type="button" class="btn btn-danger me-auto" id="deleteTagButton">Eliminar</button>
+                            <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Editar Tarea -->
+    <div class="modal fade" id="editTaskModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Editar Tarea</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="editTaskForm">
+                        <input type="hidden" id="editTaskId">
+                        <div class="mb-3">
+                            <label for="editTaskName" class="form-label">Nombre de la Tarea</label>
+                            <input type="text" class="form-control" id="editTaskName" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="editTaskTag" class="form-label">Etiqueta</label>
+                            <select class="form-select" id="editTaskTag">
+                                <option value="">Sin etiqueta</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="editTaskDate" class="form-label">Fecha</label>
+                            <input type="date" class="form-control" id="editTaskDate" required>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Confirmar Eliminación de Tarea -->
+    <div class="modal fade" id="confirmDeleteTaskModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Confirmar Eliminación</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p>¿Estás seguro de que deseas eliminar esta tarea?</p>
+                    <input type="hidden" id="deleteTaskId">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-danger" onclick="deleteTask()">Eliminar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../controllers/env.js"></script>
+    <script src="../controllers/auth_controller.js"></script>
+    <script src ="../controllers/tasks_controller.js"></script>
+    <script src = "../controllers/tags_controller.js"></script> 
+    
+    <!-- Bootstrap 5 JS y dependencias -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            let userImg = document.getElementById("user-img");
+            let userIcon = document.getElementById("user-icon");
+            if (userImg.src && !userImg.src.includes("placeholder.com")) {
+                userIcon.style.display = "none";  // Oculta el icono
+                userImg.style.display = "inline"; // Muestra la imagen
+            }
+        });
+    </script>
+</body>
+</html>
