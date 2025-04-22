@@ -68,7 +68,22 @@
         background-color: #c8b6ff;
     }
     
-   
+   /* Tag filter buttons */
+    .tag-filter-btn {
+        transition: opacity 0.3s ease;
+        border: none;
+        padding: 5px 10px;
+        border-radius: 15px;
+        margin: 0 5px 5px 0;
+    }
+
+    /* Task badges */
+    .task-badge {
+        margin-right: 5px;
+        padding: 4px 8px;
+        border-radius: 10px;
+        font-size: 0.8rem;
+    }
     
     .etiquetas {
         display: flex;
@@ -140,13 +155,13 @@
                         </div>
                         <div class="col-8">
                             <p><b id = "userNameWidget"></b></p>
-                            <p>Tareas terminadas hoy: <strong>6 tareas</strong></p>
-                            <p>Tareas pendientes de hoy: <strong>4 tareas</strong></p>
+                            <p><strong>Tareas terminadas hoy:</strong> <span id="completedTasksCount">0 tareas</span></p>
+                            <p><strong>Tareas pendientes de hoy:</strong> <span id="pendingTasksCount">0 tareas</span></p>
                         </div>
                     </div>
                     <div class="mt-3">
                         <p><strong>AI Resume:</strong></p>
-                        <p>Stephanie Borrego es un usuario que ha terminado 6 tareas hoy. Aún tiene 4 pendientes para el día, por lo que lleva un total del 60% de su trabajo terminado.</p>
+                        <p id="aiSummaryText">Cargando resumen...</p>
                     </div>
                 </div>
             </div>
@@ -166,41 +181,10 @@
                                 <th>Fecha</th>
                             </tr>
                         </thead>
-                        <tbody id="hoy">
-                            <tr>
-                                <td>
-                                    <input type="checkbox" class="task-checkbox">
-                                </td>
-                                <td>Escribir 3 páginas</td>
-                                <td><span class="badge bg-primary">Proyectos</span></td>
-                                <td>15/02/2025</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <input type="checkbox" class="task-checkbox">
-                                </td>
-                                <td>Ir al gimnasio</td>
-                                <td><span class="badge bg-success">Salud</span></td>
-                                <td>15/02/2025</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <input type="checkbox" class="task-checkbox">
-                                </td>
-                                <td>Dormir bien</td>
-                                <td><span class="badge bg-success">Salud</span></td>
-                                <td>15/02/2025</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <input type="checkbox" class="task-checkbox">
-                                </td>
-                                <td>Sacar basura</td>
-                                <td><span class="badge bg-warning">Higiene</span></td>
-                                <td>15/02/2025</td>
-                            </tr>
-                        </tbody>
+                        <tbody id="hoy"></tbody>
+                        <div id="pagination-hoy" class="mt-2 text-center"></div>
                     </table>
+                    
                 </div>
             </div>
 
@@ -209,10 +193,7 @@
                 <div class="widget-card scrollable">
                     <h5>Tareas Pendientes por Etiqueta</h5>
                     <div class="etiquetas">
-                        <span class="badge bg-primary">Proyectos</span>
-                        <span class="badge bg-warning">Higiene</span>
-                        <span class="badge bg-success">Salud</span>
-                        <span class="badge bg-danger">Trabajo</span>
+                        
                     </div>
                         
                     <table class="table" id="pendientes">
@@ -227,40 +208,8 @@
                                 <th>Fecha</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <input type="checkbox" class="task-checkbox">
-                                </td>
-                                <td>Escribir 3 páginas</td>
-                                <td><span class="badge bg-primary">Proyectos</span></td>
-                                <td>15/02/2025</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <input type="checkbox" class="task-checkbox">
-                                </td>
-                                <td>Diseñar portada</td>
-                                <td><span class="badge bg-primary">Proyectos</span></td>
-                                <td>19/02/2025</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <input type="checkbox" class="task-checkbox">
-                                </td>
-                                <td>Armar sinópsis</td>
-                                <td><span class="badge bg-primary">Proyectos</span></td>
-                                <td>20/02/2025</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <input type="checkbox" class="task-checkbox">
-                                </td>
-                                <td>Escribir 5 páginas</td>
-                                <td><span class="badge bg-primary">Proyectos</span></td>
-                                <td>22/02/2025</td>
-                            </tr>
-                        </tbody>
+                        <tbody id="pendientes"></tbody> 
+                        <div id="pagination-pendientes" class="mt-2 text-center"></div>
                     </table>
                 </div>
             </div>
@@ -280,40 +229,8 @@
                                 <th>Fecha</th>
                             </tr>
                         </thead>
-                        <tbody id="terminadas">
-                            <tr>
-                                <td>
-                                    <input type="checkbox" class="task-checkbox" checked>
-                                </td>
-                                <td><del>Armar índice</del></td>
-                                <td><span class="badge bg-primary">Proyectos</span></td>
-                                <td>14/02/2025</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <input type="checkbox" class="task-checkbox" checked>
-                                </td>
-                                <td><del>Bañarse</del></td>
-                                <td><span class="badge bg-warning">Higiene</span></td>
-                                <td>15/02/2025</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <input type="checkbox" class="task-checkbox" checked>
-                                </td>
-                                <td><del>Reunión con Matt</del></td>
-                                <td><span class="badge bg-danger">Trabajo</span></td>
-                                <td>14/02/2025</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <input type="checkbox" class="task-checkbox" checked>
-                                </td>
-                                <td><del>Practica 1/del></td>
-                                <td><span class="badge bg-danger">Trabajo</span></td>
-                                <td>17/02/2025</td>
-                            </tr>
-                        </tbody>
+                        <tbody id="terminadas"></tbody>
+                        <div id="pagination-terminadas" class="mt-2 text-center"></div>
                     </table>
                 </div>
             </div>
@@ -530,6 +447,10 @@
                 userImg.style.display = "inline"; // Muestra la imagen
             }
         });
+        updateUserSummary();
+        showTasksToday();
+        loadTagsForFilter();
+        showCompletedTasks();
     </script>
 </body>
 </html>

@@ -1,1 +1,44 @@
-[]
+[
+  {
+    "id": 1,
+    "title": "Practica 4",
+    "id_user": 1,
+    "due_date": "2025-04-11",
+    "status": "A",
+    "tags": [
+      1
+    ],
+    "description": ""
+  },
+  {
+    "id": 2,
+    "title": "Tarea 1",
+    "id_user": 1,
+    "due_date": "2025-04-10",
+    "status": "A",
+    "tags": [],
+    "description": ""
+  },
+  {
+    "id": 3,
+    "title": "Tarea 2",
+    "id_user": 1,
+    "due_date": "2025-04-17",
+    "status": "A",
+    "tags": [
+      1
+    ],
+    "description": ""
+  },
+  {
+    "id": 4,
+    "title": "Practica 4",
+    "id_user": 1,
+    "due_date": "2025-04-25",
+    "status": "A",
+    "tags": [
+      2
+    ],
+    "description": ""
+  }
+]

@@ -14,55 +14,62 @@ exports.createTask = (req, res) => {
         if (!authHeader) {
             return res.status(401).json({ error: 'Se requiere header x-auth' });
         }
+
+        users = JSON.parse(fs.readFileSync('./database/users.json'));
         const user = users.find(user => user.password === authHeader);
         if (!user) {
             return res.status(401).json({ error: 'Credenciales inválidas' });
         }
-        
-        // Set the user in the request object
-        req.user = user;
-        // Validate required fields
+
+        // Validar campos
         if (!req.body.title || !req.body.id_user || !req.body.due_date) {
             return res.status(400).json({
                 error: 'Faltan campos obligatorios: title, id_user, due_date'
             });
         }
-        
-        // Validate user authentication
-        if (req.user.id !== req.body.id_user) {
+
+        if (user.id !== req.body.id_user) {
             return res.status(403).json({
                 error: 'No puedes crear tareas para otro usuario'
             });
         }
 
-        // Create new task
+        // Recargar tareas del archivo (por si hay cambios recientes)
+        tasks = JSON.parse(fs.readFileSync('./database/tasks.json'));
+
+        // Obtener nuevo ID
+        const newId = tasks.length ? Math.max(...tasks.map(t => t.id)) + 1 : 1;
+
+        // Crear tarea
         let new_task = new Task(
             req.body.title,
             req.body.id_user,
             req.body.due_date,
-            req.body.status,
-            req.body.tags,
-            req.body.description
+            req.body.status || "A",
+            req.body.tags || [],
+            req.body.description || ""
         );
-        
-        // Convert to plain object and add to tasks array
-        tasks.push(new_task.toObj());
-        
-        // Save to database
+
+        // Convertir a objeto y asignar el ID generado
+        let taskObj = new_task.toObj();
+        taskObj.id = newId;
+
+        // Guardar
+        tasks.push(taskObj);
         fs.writeFileSync('./database/tasks.json', JSON.stringify(tasks, null, 2));
-        
-        // Return success response with created task
-        res.json({
+
+        res.status(201).json({
             message: "Tarea creada con éxito",
-            task: new_task.toObj()
+            task: taskObj
         });
     } catch (err) {
-        console.log(err); // Log the error for debugging
-        res.status(400).json({
+        console.log(err); // Log para depuración
+        res.status(500).json({
             error: err.message || 'Error al crear la tarea'
         });
     }
 };
+
 exports.getAllTasks = (req, res) => {
     try {
         // 1. Get authentication header

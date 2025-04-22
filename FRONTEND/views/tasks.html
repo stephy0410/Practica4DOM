@@ -122,113 +122,11 @@
                                 <th>Acciones</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <input type="checkbox" class="task-checkbox">
-                                </td>
-                                <td>Escribir 3 páginas</td>
-                                <td><span class="badge bg-primary">Proyectos</span></td>
-                                <td>15/02/2025</td>
-                                <td>
-                                    <i class="fas fa-pen" style="cursor:pointer; margin-right:10px; color:blue;" title="Editar"></i>
-                                    <i class="fas fa-trash" style="cursor:pointer; margin-right:10px;color:red;" title="Eliminar"></i>
-                                    <i class="fas fa-tag" style="cursor:pointer; color:green;" title="Etiquetar" ></i>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <input type="checkbox" class="task-checkbox">
-                                </td>
-                                <td>Ir al gimnasio</td>
-                                <td><span class="badge bg-success">Salud</span></td>
-                                <td>15/02/2025</td>
-                                <td>
-                                    <i class="fas fa-pen" style="cursor:pointer; margin-right:10px; color:blue;" title="Editar"></i>
-                                    <i class="fas fa-trash" style="cursor:pointer; margin-right:10px;color:red;" title="Eliminar"></i>
-                                    <i class="fas fa-tag" style="cursor:pointer; color:green;" title="Etiquetar" ></i>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <input type="checkbox" class="task-checkbox">
-                                </td>
-                                <td>Dormir bien</td>
-                                <td><span class="badge bg-success">Salud</span></td>
-                                <td>15/02/2025</td>
-                                <td>
-                                    <i class="fas fa-pen" style="cursor:pointer; margin-right:10px; color:blue;" title="Editar"></i>
-                                    <i class="fas fa-trash" style="cursor:pointer; margin-right:10px;color:red;" title="Eliminar"></i>
-                                    <i class="fas fa-tag" style="cursor:pointer; color:green;" title="Etiquetar" ></i>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <input type="checkbox" class="task-checkbox">
-                                </td>
-                                <td>Sacar basura</td>
-                                <td><span class="badge bg-warning">Higiene</span></td>
-                                <td>15/02/2025</td>
-                                <td>
-                                    <i class="fas fa-pen" style="cursor:pointer; margin-right:10px; color:blue;" title="Editar"></i>
-                                    <i class="fas fa-trash" style="cursor:pointer; margin-right:10px;color:red;" title="Eliminar"></i>
-                                    <i class="fas fa-tag" style="cursor:pointer; color:green;" title="Etiquetar" ></i>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <input type="checkbox" class="task-checkbox" checked>
-                                </td>
-                                <td><del>Armar índice</del></td>
-                                <td><span class="badge bg-primary">Proyectos</span></td>
-                                <td>14/02/2025</td>
-                                <td>
-                                    <i class="fas fa-pen" style="cursor:pointer; margin-right:10px; color:blue;" title="Editar"></i>
-                                    <i class="fas fa-trash" style="cursor:pointer; margin-right:10px;color:red;" title="Eliminar"></i>
-                                    <i class="fas fa-tag" style="cursor:pointer; color:green;" title="Etiquetar" ></i>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <input type="checkbox" class="task-checkbox" checked>
-                                </td>
-                                <td><del>Bañarse</del></td>
-                                <td><span class="badge bg-warning">Higiene</span></td>
-                                <td>15/02/2025</td>
-                                <td>
-                                    <i class="fas fa-pen" style="cursor:pointer; margin-right:10px; color:blue;" title="Editar"></i>
-                                    <i class="fas fa-trash" style="cursor:pointer; margin-right:10px;color:red;" title="Eliminar"></i>
-                                    <i class="fas fa-tag" style="cursor:pointer; color:green;" title="Etiquetar" ></i>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <input type="checkbox" class="task-checkbox" checked>
-                                </td>
-                                <td><del>Reunión con Matt</del></td>
-                                <td><span class="badge bg-danger">Trabajo</span></td>
-                                <td>14/02/2025</td>
-                                <td>
-                                    <i class="fas fa-pen" style="cursor:pointer; margin-right:10px; color:blue;" title="Editar"></i>
-                                    <i class="fas fa-trash" style="cursor:pointer; margin-right:10px;color:red;" title="Eliminar"></i>
-                                    <i class="fas fa-tag" style="cursor:pointer; color:green;" title="Etiquetar" ></i>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <input type="checkbox" class="task-checkbox" checked>
-                                </td>
-                                <td><del>Practica 1/del></td>
-                                <td><span class="badge bg-danger">Trabajo</span></td>
-                                <td>17/02/2025</td>
-                                <td>
-                                    <i class="fas fa-pen" style="cursor:pointer; margin-right:10px; color:blue;" title="Editar"></i>
-                                    <i class="fas fa-trash" style="cursor:pointer; margin-right:10px;color:red;" title="Eliminar"></i>
-                                    <i class="fas fa-tag" style="cursor:pointer; color:green;" title="Etiquetar" ></i>
-                                </td>
-                            </tr>
+                        <tbody id="tasksTableBody">
+                            <!-- Tareas se insertan aquí -->
                         </tbody>
                     </table>
+                    <div id="pagination-tasks" class="mt-3 text-center"></div>
                 </div>
             </div>
             </div>
@@ -249,18 +147,15 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    <form id="newTaskForm">
                         <div class="mb-3">
                             <label for="taskName" class="form-label">Nombre de la Tarea</label>
                             <input type="text" class="form-control" id="taskName" required>
                         </div>
                         <div class="mb-3">
                             <label for="taskTag" class="form-label">Etiqueta</label>
-                            <select class="form-select" id="taskTag" required>
-                                <option value="Salud">Salud</option>
-                                <option value="Proyectos">Proyectos</option>
-                                <option value="Higiene">Higiene</option>
-                                <option value="Trabajo">Trabajo</option>
+                            <select class="form-select" id="taskTag" >
+                               
                             </select>
                         </div>
                         <div class="mb-3">
@@ -401,37 +296,37 @@
     <!-- Modal: Editar Tarea -->
     <div class="modal fade" id="editTaskModal" tabindex="-1">
         <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Editar Tarea</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        <div class="modal-content">
+            <form id="editTaskForm">
+            <div class="modal-header">
+                <h5 class="modal-title">Editar Tarea</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="editTaskId">
+                <div class="mb-3">
+                <label for="editTaskName" class="form-label">Nombre</label>
+                <input type="text" class="form-control" id="editTaskName" required>
                 </div>
-                <div class="modal-body">
-                    <form id="editTaskForm">
-                        <input type="hidden" id="editTaskId">
-                        <div class="mb-3">
-                            <label for="editTaskName" class="form-label">Nombre de la Tarea</label>
-                            <input type="text" class="form-control" id="editTaskName" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="editTaskTag" class="form-label">Etiqueta</label>
-                            <select class="form-select" id="editTaskTag">
-                                <option value="">Sin etiqueta</option>
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label for="editTaskDate" class="form-label">Fecha</label>
-                            <input type="date" class="form-control" id="editTaskDate" required>
-                        </div>
-                        <div class="d-flex justify-content-between">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                            <button type="submit" class="btn btn-primary">Guardar Cambios</button>
-                        </div>
-                    </form>
+                <div class="mb-3">
+                <label for="editTaskTag" class="form-label">Etiqueta</label>
+                <select class="form-select" id="editTaskTag" required></select>
+                </div>
+                <div class="mb-3">
+                <label for="editTaskDate" class="form-label">Fecha</label>
+                <input type="date" class="form-control" id="editTaskDate" required>
                 </div>
             </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+            </div>
+            </form>
+        </div>
         </div>
     </div>
+  
+  
 
     <!-- Modal: Confirmar Eliminación de Tarea -->
     <div class="modal fade" id="confirmDeleteTaskModal" tabindex="-1">

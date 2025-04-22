@@ -1,7 +1,7 @@
 [
   {
     "id": 1,
-    "name": "Juan Pérez Segundo",
+    "name": "Juan Pérez",
     "email": "juan.perez@example.com",
     "password": "password",
     "joined_at": "2025-04-10T18:21:27.314Z"

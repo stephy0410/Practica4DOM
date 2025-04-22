@@ -76,28 +76,24 @@ class Task{
         this.#status = value;
     }
     
-    set  tags(value){
-       // Si value es undefined o null, asignar un array vacío
-        if (value == null) {
+    set tags(value) {
+        if (!value || !Array.isArray(value)) {
             this.#tags = [];
             return;
         }
-        
-        // Si value no es un array, lanzar excepción
-        if (!Array.isArray(value)) {
-            throw new TaskException("Tags must be an array");
-        }
-        
-        // Si el array está vacío, asignarlo directamente
+    
         if (value.length === 0) {
             this.#tags = [];
             return;
         }
+    
         if (!value.every(tagID => data.tags.some(tag => tag.id === tagID))) {
             throw new TaskException("Some tags do not exist.");
         }
+    
         this.#tags = value;
     }
+    
     set id_user(value) {
         const userId = parseInt(value); // Convert to integer
         const userExists = data.users.find(user => user.id === userId);
